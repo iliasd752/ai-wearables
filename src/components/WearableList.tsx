@@ -4,7 +4,7 @@ import type { Wearable } from "../lib/types";
 import WearableCard from "./WearableCard";
 
 export default function WearableList() {
-  const [wearables, deleteWearable] = useWearablesStore();
+  const [wearables, { deleteWearable }] = useWearablesStore();
   const [showAddForm, setShowAddForm] = useState(false);
 
   const handleEditWearable = (wearable: Wearable) => {

@@ -73,11 +73,13 @@ export default function useWearablesStore() {
     return Wearables.find((wearable) => wearable.id === id);
   };
 
-  return {
+  return [
     Wearables,
-    addWearable,
-    updateWearable,
-    deleteWearable,
-    getWearableById,
-  };
+    {
+      addWearable,
+      updateWearable,
+      deleteWearable,
+      getWearableById,
+    },
+  ] as const;
 }
