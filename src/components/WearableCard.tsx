@@ -1,4 +1,4 @@
-import { Star, Trash2 } from "lucide-react";
+import { Star, Trash2, Edit3 } from "lucide-react";
 import type { Wearable } from "../lib/types";
 import { cn } from "../lib/utils";
 
@@ -42,37 +42,40 @@ export default function WearableCard({
       onDelete?.(wearable.id);
     }
   };
+
   return (
-    <>
-      <div className="bg-card rounded-lg border border-border p-6 hover:shadow-lg transition-shadow duration-200">
-        <div className="flex items-start justify-between mb-4">
-          <div className="flex-1">
-            <h3 className="text-lg font-semibold text-card-foreground mb-1">
-              {wearable.productName}
-            </h3>
-            <p className="text-sm text-muted-foreground">{wearable.brand}</p>
-          </div>
+    <div className="bg-card rounded-lg border border-border p-6 hover:shadow-lg transition-shadow duration-200">
+      {/* Header with title and actions */}
+      <div className="flex items-start justify-between mb-4">
+        <div className="flex-1">
+          <h3 className="text-lg font-semibold text-card-foreground mb-1">
+            {wearable.productName}
+          </h3>
+          <p className="text-sm text-muted-foreground">{wearable.brand}</p>
+        </div>
+        <div className="flex gap-2 ml-4">
+          {onEdit && (
+            <button
+              onClick={handleEdit}
+              className="p-2 text-muted-foreground hover:text-primary hover:bg-accent rounded-md transition-colors"
+              aria-label={`Edit ${wearable.productName}`}
+            >
+              <Edit3 className="h-4 w-4" />
+            </button>
+          )}
+          {onDelete && (
+            <button
+              onClick={handleDelete}
+              className="p-2 text-muted-foreground hover:text-destructive hover:bg-accent rounded-md transition-colors"
+              aria-label={`Delete ${wearable.productName}`}
+            >
+              <Trash2 className="h-4 w-4" />
+            </button>
+          )}
         </div>
       </div>
-      <div className="flex gap-2 ml-4">
-        {onEdit && (
-          <button
-            onClick={handleEdit}
-            className="p-2 text-muted-foreground hover:text-primary hover:bg-accent rounded-md transition-colors"
-            aria-label={`Edit ${wearable.productName}`}
-          ></button>
-        )}
-        {onDelete && (
-          <button
-            onClick={handleDelete}
-            className="p-2 text-muted-foreground hover:text-destructive hover:bg-accent rounded-md transition-colors"
-            aria-label={`Delete ${wearable.productName}`}
-          >
-            <Trash2 className="h-4 w-4" />
-          </button>
-        )}
-      </div>
 
+      {/* Badge and Rating */}
       <div className="flex items-center gap-2 mb-4">
         <span
           className={cn(
@@ -88,6 +91,7 @@ export default function WearableCard({
         </div>
       </div>
 
+      {/* AI Feature */}
       <div className="mb-4">
         <p className="text-sm text-card-foreground font-medium mb-1">
           AI Feature
@@ -96,6 +100,8 @@ export default function WearableCard({
           {wearable.coreAIFeature}
         </p>
       </div>
+
+      {/* Stats Grid */}
       <div className="grid grid-cols-2 gap-4 mb-4 text-sm">
         <div>
           <p className="text-muted-foreground">Price</p>
@@ -106,13 +112,13 @@ export default function WearableCard({
         <div>
           <p className="text-muted-foreground">Battery</p>
           <p className="font-medium text-card-foreground">
-            {wearable.batteryHours}
+            {wearable.batteryHours}h
           </p>
         </div>
         <div>
           <p className="text-muted-foreground">Weight</p>
           <p className="font-medium text-card-foreground">
-            {wearable.weightGrams}
+            {wearable.weightGrams}g
           </p>
         </div>
         <div>
@@ -120,12 +126,14 @@ export default function WearableCard({
           <p className="font-medium text-card-foreground">{formattedDate}</p>
         </div>
       </div>
+
+      {/* Connectivity */}
       <div className="pt-4 border-t border-border">
         <p className="text-xs text-muted-foreground uppercase tracking-wide mb-1">
           Connectivity
         </p>
         <p className="text-sm text-card-foreground">{wearable.connectivity}</p>
       </div>
-    </>
+    </div>
   );
 }
