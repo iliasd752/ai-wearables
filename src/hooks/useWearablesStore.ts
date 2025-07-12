@@ -43,7 +43,7 @@ const initialWearables: Wearable[] = [
   },
 ];
 
-export function useWearablesStore() {
+export default function useWearablesStore() {
   const [Wearables, setWearables] = useState<Wearable[]>(initialWearables);
 
   const addWearable = (newWearable: Omit<Wearable, "id">) => {
@@ -69,7 +69,7 @@ export function useWearablesStore() {
     setWearables((prev) => prev.filter((wearable) => wearable.id !== id));
   };
 
-  const getWearbleById = (id: string): Wearable | undefined => {
+  const getWearableById = (id: string): Wearable | undefined => {
     return Wearables.find((wearable) => wearable.id === id);
   };
 
@@ -78,6 +78,6 @@ export function useWearablesStore() {
     addWearable,
     updateWearable,
     deleteWearable,
-    getWearbleById,
+    getWearableById,
   };
 }
