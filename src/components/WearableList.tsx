@@ -1,16 +1,43 @@
+import { useState } from "react";
 import useWearablesStore from "../hooks/useWearablesStore";
 import type { Wearable } from "../lib/types";
 import WearableCard from "./WearableCard";
+import AddWearableForm from "./AddWearableForm";
 
-interface WearableListProps {
-  onEditWearable: (wearable: Wearable) => void;
-}
+export default function WearableList() {
+  const [wearables, { addWearable, updateWearable, deleteWearable }] =
+    useWearablesStore();
+  const [showAddForm, setShowAddForm] = useState(false);
+  const [editingWearable, setEditingWearable] = useState<Wearable | null>(null);
 
-export default function WearableList({ onEditWearable }: WearableListProps) {
-  const [wearables, { deleteWearable }] = useWearablesStore();
+  const handleEditWearable = (wearable: Wearable) => {
+    setEditingWearable(wearable);
+    setShowAddForm(true);
+  };
 
   const handleDeleteWearable = (id: string) => {
     deleteWearable(id);
+  };
+
+  const handleAddNewWearable = () => {
+    setEditingWearable(null);
+    setShowAddForm(true);
+  };
+
+  const handleFormSubmit = (wearableData: Omit<Wearable, "id">) => {
+    if (editingWearable) {
+      // Update existing wearable
+      updateWearable(editingWearable.id, wearableData);
+    } else {
+      // Add new wearable
+      addWearable(wearableData);
+    }
+    handleCloseForm();
+  };
+
+  const handleCloseForm = () => {
+    setShowAddForm(false);
+    setEditingWearable(null);
   };
 
   return (
@@ -29,6 +56,13 @@ export default function WearableList({ onEditWearable }: WearableListProps) {
                 </span>
               </p>
             </div>
+            <button
+              onClick={handleAddNewWearable}
+              className="bg-foreground text-background px-4 py-2 rounded-lg font-medium hover:bg-foreground/90 transition-colors flex items-center gap-2"
+            >
+              <span className="text-lg">+</span>
+              Add New Wearable
+            </button>
           </div>
         </div>
       </div>
@@ -45,11 +79,20 @@ export default function WearableList({ onEditWearable }: WearableListProps) {
             <WearableCard
               key={wearable.id}
               wearable={wearable}
-              onEdit={onEditWearable}
+              onEdit={handleEditWearable}
               onDelete={handleDeleteWearable}
             />
           ))}
         </div>
+      )}
+
+      {/* Add/Edit Wearable Form */}
+      {showAddForm && (
+        <AddWearableForm
+          onSubmit={handleFormSubmit}
+          onCancel={handleCloseForm}
+          editingWearable={editingWearable}
+        />
       )}
     </>
   );

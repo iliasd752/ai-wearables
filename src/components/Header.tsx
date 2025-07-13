@@ -18,43 +18,6 @@ const Header = ({ onAddWearable }: HeaderProps) => {
           </div>
 
           {/* Desktop Navigation - Centered */}
-          <nav className="hidden md:flex space-x-8 flex-1 justify-center">
-            <a
-              href="#"
-              className="text-gray-700 hover:text-gray-900 px-3 py-2 text-sm font-medium transition-colors"
-              style={{ textDecoration: "none" }}
-            >
-              Home
-            </a>
-            <a
-              href="#"
-              className="text-gray-700 hover:text-gray-900 px-3 py-2 text-sm font-medium transition-colors"
-              style={{ textDecoration: "none" }}
-            >
-              Products
-            </a>
-            <a
-              href="#"
-              className="text-gray-700 hover:text-gray-900 px-3 py-2 text-sm font-medium transition-colors"
-              style={{ textDecoration: "none" }}
-            >
-              Categories
-            </a>
-            <a
-              href="#"
-              className="text-gray-700 hover:text-gray-900 px-3 py-2 text-sm font-medium transition-colors"
-              style={{ textDecoration: "none" }}
-            >
-              Reviews
-            </a>
-            <a
-              href="#"
-              className="text-gray-700 hover:text-gray-900 px-3 py-2 text-sm font-medium transition-colors"
-              style={{ textDecoration: "none" }}
-            >
-              About
-            </a>
-          </nav>
 
           {/* Desktop Actions - Right aligned */}
           <div className="hidden md:flex items-center space-x-1">
