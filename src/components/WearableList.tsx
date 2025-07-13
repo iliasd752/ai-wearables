@@ -1,43 +1,16 @@
-import { useState } from "react";
 import useWearablesStore from "../hooks/useWearablesStore";
 import type { Wearable } from "../lib/types";
 import WearableCard from "./WearableCard";
-import AddWearableForm from "./AddWearableForm";
 
-export default function WearableList() {
-  const [wearables, { addWearable, updateWearable, deleteWearable }] =
-    useWearablesStore();
-  const [showAddForm, setShowAddForm] = useState(false);
-  const [editingWearable, setEditingWearable] = useState<Wearable | null>(null);
+interface WearableListProps {
+  onEditWearable: (wearable: Wearable) => void;
+}
 
-  const handleEditWearable = (wearable: Wearable) => {
-    setEditingWearable(wearable);
-    setShowAddForm(true);
-  };
+export default function WearableList({ onEditWearable }: WearableListProps) {
+  const [wearables, { deleteWearable }] = useWearablesStore();
 
   const handleDeleteWearable = (id: string) => {
     deleteWearable(id);
-  };
-
-  const handleAddNewWearable = () => {
-    setEditingWearable(null);
-    setShowAddForm(true);
-  };
-
-  const handleFormSubmit = (wearableData: Omit<Wearable, "id">) => {
-    if (editingWearable) {
-      // Update existing wearable
-      updateWearable(editingWearable.id, wearableData);
-    } else {
-      // Add new wearable
-      addWearable(wearableData);
-    }
-    handleCloseForm();
-  };
-
-  const handleCloseForm = () => {
-    setShowAddForm(false);
-    setEditingWearable(null);
   };
 
   return (
@@ -56,12 +29,6 @@ export default function WearableList() {
                 </span>
               </p>
             </div>
-            <button
-              onClick={handleAddNewWearable}
-              className="bg-primary text-primary-foreground px-4 py-2 rounded-lg font-medium hover:bg-primary/90 transition-colors"
-            >
-              Add New Wearable
-            </button>
           </div>
         </div>
       </div>
@@ -73,27 +40,16 @@ export default function WearableList() {
           </p>
         </div>
       ) : (
-        <section className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {wearables.map((wearable: Wearable) => (
-              <WearableCard
-                key={wearable.id}
-                wearable={wearable}
-                onEdit={handleEditWearable}
-                onDelete={handleDeleteWearable}
-              />
-            ))}
-          </div>
-        </section>
-      )}
-
-      {/* Add/Edit Wearable Form */}
-      {showAddForm && (
-        <AddWearableForm
-          onSubmit={handleFormSubmit}
-          onCancel={handleCloseForm}
-          editingWearable={editingWearable}
-        />
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {wearables.map((wearable: Wearable) => (
+            <WearableCard
+              key={wearable.id}
+              wearable={wearable}
+              onEdit={onEditWearable}
+              onDelete={handleDeleteWearable}
+            />
+          ))}
+        </div>
       )}
     </>
   );
