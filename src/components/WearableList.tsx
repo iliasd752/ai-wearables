@@ -2,14 +2,17 @@ import { useState } from "react";
 import useWearablesStore from "../hooks/useWearablesStore";
 import type { Wearable } from "../lib/types";
 import WearableCard from "./WearableCard";
+import AddWearableForm from "./AddWearableForm";
 
 export default function WearableList() {
-  const [wearables, { deleteWearable }] = useWearablesStore();
+  const [wearables, { addWearable, updateWearable, deleteWearable }] =
+    useWearablesStore();
   const [showAddForm, setShowAddForm] = useState(false);
+  const [editingWearable, setEditingWearable] = useState<Wearable | null>(null);
 
   const handleEditWearable = (wearable: Wearable) => {
-    console.log("Edit wearable:", wearable.productName);
-    alert(`Edit functionality coming soon for ${wearable.productName}!`);
+    setEditingWearable(wearable);
+    setShowAddForm(true);
   };
 
   const handleDeleteWearable = (id: string) => {
@@ -17,12 +20,24 @@ export default function WearableList() {
   };
 
   const handleAddNewWearable = () => {
+    setEditingWearable(null);
     setShowAddForm(true);
-    alert("Add new wearable form coming in the next step!");
+  };
+
+  const handleFormSubmit = (wearableData: Omit<Wearable, "id">) => {
+    if (editingWearable) {
+      // Update existing wearable
+      updateWearable(editingWearable.id, wearableData);
+    } else {
+      // Add new wearable
+      addWearable(wearableData);
+    }
+    handleCloseForm();
   };
 
   const handleCloseForm = () => {
     setShowAddForm(false);
+    setEditingWearable(null);
   };
 
   return (
@@ -50,6 +65,7 @@ export default function WearableList() {
           </div>
         </div>
       </div>
+
       {wearables.length === 0 ? (
         <div className="text-center py-12">
           <p className="text-muted-foreground">
@@ -69,21 +85,13 @@ export default function WearableList() {
         </div>
       )}
 
+      {/* Add/Edit Wearable Form */}
       {showAddForm && (
-        <div className="fixed inset-0 bg-black/50 flex items-center justify-center p-4 z-50">
-          <div className="bg-card rounded-lg p-6 max-w-md w-full">
-            <h3 className="text-lg font-semibold mb-4">Add New Wearable</h3>
-            <p className="text-muted-foreground mb-4">
-              Form component coming in the next step
-            </p>
-            <button
-              onClick={handleCloseForm}
-              className="bg-secondary text-secondary-foreground px-4 py-2 rounded-lg"
-            >
-              Close
-            </button>
-          </div>
-        </div>
+        <AddWearableForm
+          onSubmit={handleFormSubmit}
+          onCancel={handleCloseForm}
+          editingWearable={editingWearable}
+        />
       )}
     </>
   );

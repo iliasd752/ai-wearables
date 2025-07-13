@@ -60,7 +60,7 @@ export default function WearableCard({
               className="p-2 text-muted-foreground hover:text-primary hover:bg-accent rounded-md transition-colors"
               aria-label={`Edit ${wearable.productName}`}
             >
-              <Edit3 className="h-4 w-4" />
+              <Edit3 className="text-white h-4 w-4" />
             </button>
           )}
           {onDelete && (
@@ -69,7 +69,7 @@ export default function WearableCard({
               className="p-2 text-muted-foreground hover:text-destructive hover:bg-accent rounded-md transition-colors"
               aria-label={`Delete ${wearable.productName}`}
             >
-              <Trash2 className="h-4 w-4" />
+              <Trash2 className="text-white h-4 w-4" />
             </button>
           )}
         </div>
