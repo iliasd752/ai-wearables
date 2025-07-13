@@ -12,8 +12,6 @@ A **React + TypeScript** playground for cataloguing the fast‑growing family 
 
 <br/>
 
-![Hero screenshot – AI Wearables catalogue UI](./docs/screenshot.png "Add your own screenshot here!")
-
 </div>
 
 ---
