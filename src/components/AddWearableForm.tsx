@@ -92,7 +92,7 @@ export default function AddWearableForm({
             className="p-2 hover:bg-accent rounded-md transition-colors"
             disabled={isSubmitting}
           >
-            <X className="h-5 w-5" />
+            <X className="text-white h-5 w-5" />
           </button>
         </div>
 
@@ -380,7 +380,7 @@ export default function AddWearableForm({
               type="button"
               onClick={onCancel}
               disabled={isSubmitting}
-              className="flex-1 bg-secondary text-secondary-foreground px-4 py-2 rounded-md font-medium hover:bg-secondary/90 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+              className="text-white flex-1 border border-border bg-background px-4 py-2 rounded-md font-medium hover:bg-accent transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
             >
               Cancel
             </button>
