@@ -73,16 +73,18 @@ export default function WearableList() {
           </p>
         </div>
       ) : (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {wearables.map((wearable: Wearable) => (
-            <WearableCard
-              key={wearable.id}
-              wearable={wearable}
-              onEdit={handleEditWearable}
-              onDelete={handleDeleteWearable}
-            />
-          ))}
-        </div>
+        <section className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {wearables.map((wearable: Wearable) => (
+              <WearableCard
+                key={wearable.id}
+                wearable={wearable}
+                onEdit={handleEditWearable}
+                onDelete={handleDeleteWearable}
+              />
+            ))}
+          </div>
+        </section>
       )}
 
       {/* Add/Edit Wearable Form */}
