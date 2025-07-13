@@ -1,20 +1,26 @@
-
-import  WearableList  from "./components/WearableList";
+import Footer from "./components/Footer";
+import Header from "./components/Header";
+import WearableList from "./components/WearableList";
 
 function App() {
-
   return (
-   <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-background">
       <header className="border-b border-border bg-card">
+        <Header />
         <div className="container mx-auto px-4 py-6">
-          <h1 className="text-3xl font-bold text-foreground">Ai Wearables Collection</h1>
-          <p className="text-muted-foreground mt-2">Discover and manage the latest AI-powered wearable devices</p>
+          <h1 className="text-3xl font-bold text-foreground">
+            Ai Wearables Collection
+          </h1>
+          <p className="text-muted-foreground mt-2">
+            Discover and manage the latest AI-powered wearable devices
+          </p>
         </div>
       </header>
       <main className="container mx-auto px-4 py-8">
         <WearableList />
       </main>
-   </div>
+      <Footer />
+    </div>
   );
 }
 
