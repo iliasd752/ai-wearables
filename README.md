@@ -29,19 +29,6 @@ A **React + TypeScript** playground for cataloguing the fast‑growing family 
 
 ---
 
-## 📑 Table of Contents
-
-- [Getting Started](#-getting-started)
-- [Project Structure](#-project-structure)
-- [How It Works](#-how-it-works)
-- [NPM Scripts](#-npm-scripts)
-- [Extending the Project](#-extending-the-project)
-- [Contributing](#-contributing)
-- [License](#-license)
-- [Credits](#credits)
-
----
-
 ## 🏃‍♂️ Getting Started
 
 <details>
@@ -50,7 +37,6 @@ A **React + TypeScript** playground for cataloguing the fast‑growing family 
 ```bash
 git clone https://github.com/iliasd752/ai-wearables.git
 cd ai-wearables
-git checkout feature/add-wearable   # or main when merged
 npm install                         # or yarn / pnpm
 ```
 
