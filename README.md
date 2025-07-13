@@ -12,7 +12,7 @@ A **React + TypeScript** playground for cataloguing the fast‑growing family 
 
 <br/>
 
-![AI Wearables App Screenshot](./assets/preview-wearables.jpg)
+![AI Wearables App Screenshot](./assets/preview-wearables.png)
 
 </div>
 
