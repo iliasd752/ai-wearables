@@ -58,8 +58,9 @@ export default function WearableList() {
             </div>
             <button
               onClick={handleAddNewWearable}
-              className="bg-primary text-primary-foreground px-4 py-2 rounded-lg font-medium hover:bg-primary/90 transition-colors"
+              className="bg-foreground text-background px-4 py-2 rounded-lg font-medium hover:bg-foreground/90 transition-colors flex items-center gap-2"
             >
+              <span className="text-lg">+</span>
               Add New Wearable
             </button>
           </div>
